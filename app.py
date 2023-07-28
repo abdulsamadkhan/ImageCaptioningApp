@@ -1,4 +1,6 @@
 import gradio as gr
+import requests, json
+
 
 def greet(name):
     return "Hello " + name + "!!"
