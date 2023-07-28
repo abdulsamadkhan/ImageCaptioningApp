@@ -36,7 +36,7 @@ def get_completion(inputs, parameters=None, ENDPOINT_URL="http://internal-aws-pr
 
 demo = gr.Interface(
     fn=get_completion,
-    inputs=gr.inputs.Textbox(),
+    inputs="text",
     outputs="text"
 )
 
