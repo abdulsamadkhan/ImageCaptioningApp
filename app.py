@@ -24,9 +24,9 @@ def get_completion(inputs, parameters=None, ENDPOINT_URL="http://internal-aws-pr
     return json.loads(response.content.decode("utf-8"))
 
 
-#image_url = "https://free-images.com/sm/9596/dog_animal_greyhound_983023.jpg"
-#display(IPython.display.Image(url=image_url))
-#get_completion(image_url)
+image_url = "https://free-images.com/sm/9596/dog_animal_greyhound_983023.jpg"
+display(IPython.display.Image(url=image_url))
+get_completion(image_url)
 
 def greet(name):
     return "Hello " + name + "!!"
