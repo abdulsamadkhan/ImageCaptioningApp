@@ -1,9 +1,5 @@
 import gradio as gr
 import requests, json
-import os
-import io
-import IPython.display
-import base64 
 import torch
 
 from PIL import Image
