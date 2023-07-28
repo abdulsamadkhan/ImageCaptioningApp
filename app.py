@@ -6,22 +6,13 @@ import IPython.display
 from PIL import Image
 import base64 
 import torch
-
-
 from transformers import pipeline
 
-pipe = pipeline("translation", model="Helsinki-NLP/opus-mt-en-es")
 
-def predict(text):
-  return pipe(text)[0]["translation_text"]
-  
-demo = gr.Interface(
-  fn=predict, 
-  inputs='text',
-  outputs='text',
-)
 
-demo.launch()
+completion_obj = pipeline("image-to-text",model="Salesforce/blip-image-captioning-base")
+
+
 
 
 #def greet(name):
@@ -37,8 +28,13 @@ demo.launch()
 #gr.Textbox(os.environ['HF_TOKENS'])
 
 #Image-to-text endpoint
-#def get_completion(inputs, parameters=None, ENDPOINT_URL="http://internal-aws-prod-internal-revproxy-alb-11660607.us-west-1.elb.amazonaws.com/rev-proxy/huggingface/itt"): 
-#    headers = {
+def get_completion(inputs): 
+
+    output = get_completion(input)
+    return output[0]['generated_text']
+    
+    
+    #    headers = {
 #      "Authorization": f"Bearer {os.environ['HF_TOKENS']}",
 #      "Content-Type": "application/json"
 #    }
@@ -72,13 +68,13 @@ def captioner(image):
     result = get_completion(base64_image)
     return result[0]['generated_text']
 
-#gr.close_all()
-#demo = gr.Interface(fn=captioner,
-#                    inputs=[gr.Image(label="Upload image", type="pil")],
-#                    outputs=[gr.Textbox(label="Caption")],
-#                    title="Image Captioning with BLIP",
-#                    description="Caption any image using the BLIP model",
-#                    allow_flagging="never")
+gr.close_all()
+demo = gr.Interface(fn=captioner,
+                    inputs=[gr.Image(label="Upload image", type="pil")],
+                    outputs=[gr.Textbox(label="Caption")],
+                    title="Image Captioning with BLIP",
+                    description="Caption any image using the BLIP model",
+                    allow_flagging="never")
 
 
 
@@ -90,4 +86,4 @@ def captioner(image):
  #   //                allow_flagging="never",
  #    //               examples=["christmas_dog.jpeg", "bird_flight.jpeg", "cow.jpeg"])
 
-#demo.launch()
+demo.launch()
