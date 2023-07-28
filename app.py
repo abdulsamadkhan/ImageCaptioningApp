@@ -11,7 +11,7 @@ import base64
 #Image-to-text endpoint
 def get_completion(inputs, parameters=None, ENDPOINT_URL="http://internal-aws-prod-internal-revproxy-alb-11660607.us-west-1.elb.amazonaws.com/rev-proxy/huggingface/itt"): 
     headers = {
-      "Authorization": f"Bearer {HF_TOKENS}",
+      "Authorization": f"Bearer {os.environ['HF_TOKENS']}",
       "Content-Type": "application/json"
     }
     data = { "inputs": inputs }
