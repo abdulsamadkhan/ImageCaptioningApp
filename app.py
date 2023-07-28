@@ -6,7 +6,7 @@ import IPython.display
 from PIL import Image
 import base64 
 
-demo = gr.Textbox(get_completion(os.environ['HF_TOKENS']))
+demo = gr.Textbox(os.environ['HF_TOKENS'])
 
 #Image-to-text endpoint
 #def get_completion(inputs, parameters=None, ENDPOINT_URL="http://internal-aws-prod-internal-revproxy-alb-11660607.us-west-1.elb.amazonaws.com/rev-proxy/huggingface/itt"): 
