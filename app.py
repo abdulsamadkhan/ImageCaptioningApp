@@ -33,8 +33,15 @@ def get_completion(inputs, parameters=None, ENDPOINT_URL="http://internal-aws-pr
                                 data=json.dumps(data))
     return json.loads(response.content.decode("utf-8"))
 
-image_url = "https://free-images.com/sm/9596/dog_animal_greyhound_983023.jpg"
-demo = gr.Textbox(get_completion(image_url))
+
+demo = gr.Interface(
+    fn=get_completion,
+    inputs=gr.inputs.Textbox(),
+    outputs="text"
+)
+
+#image_url = "https://free-images.com/sm/9596/dog_animal_greyhound_983023.jpg"
+#demo = gr.get_completion(image_url)
 
 def image_to_base64_str(pil_image):
     byte_arr = io.BytesIO()
@@ -65,4 +72,4 @@ def captioner(image):
  #   //                allow_flagging="never",
  #    //               examples=["christmas_dog.jpeg", "bird_flight.jpeg", "cow.jpeg"])
 
-demo.launch()
+#demo.launch()
