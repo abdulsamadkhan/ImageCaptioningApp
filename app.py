@@ -9,7 +9,7 @@ import io
 
 
 #Image-to-text endpoint
-def get_completion(inputs, parameters=None, ENDPOINT_URL="http://internal-aws-prod-internal-revproxy-alb-11660607.us-west-1.elb.amazonaws.com/rev-proxy/huggingface/itt"]): 
+def get_completion(inputs, parameters=None, ENDPOINT_URL="http://internal-aws-prod-internal-revproxy-alb-11660607.us-west-1.elb.amazonaws.com/rev-proxy/huggingface/itt"): 
     headers = {
       "Authorization": f"Bearer {HF_TOKENS}",
       "Content-Type": "application/json"
