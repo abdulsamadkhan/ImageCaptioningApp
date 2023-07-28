@@ -1,2 +1,3 @@
 Ipython
 Pillow
+transformers
