@@ -3,7 +3,7 @@ import requests, json
 import os
 import io
 import IPython.display
-#from PIL import Image
+from PIL import Image
 #import base64 
 
 
@@ -24,12 +24,25 @@ def get_completion(inputs, parameters=None, ENDPOINT_URL="http://internal-aws-pr
     return json.loads(response.content.decode("utf-8"))
 
 
-image_url = "https://free-images.com/sm/9596/dog_animal_greyhound_983023.jpg"
-display(IPython.display.Image(url=image_url))
-get_completion(image_url)
 
-def greet(name):
-    return "Hello " + name + "!!"
+def image_to_base64_str(pil_image):
+    byte_arr = io.BytesIO()
+    pil_image.save(byte_arr, format='PNG')
+    byte_arr = byte_arr.getvalue()
+    return str(base64.b64encode(byte_arr).decode('utf-8'))
 
-iface = gr.Interface(fn=greet, inputs="text", outputs="text")
-iface.launch()
+def captioner(image):
+    base64_image = image_to_base64_str(image)
+    result = get_completion(base64_image)
+    return result[0]['generated_text']
+
+gr.close_all()
+demo = gr.Interface(fn=captioner,
+                    inputs=[gr.Image(label="Upload image", type="pil")],
+                    outputs=[gr.Textbox(label="Caption")],
+                    title="Image Captioning with BLIP",
+                    description="Caption any image using the BLIP model",
+                    allow_flagging="never",
+                    examples=["christmas_dog.jpeg", "bird_flight.jpeg", "cow.jpeg"])
+
+demo.launch(share=True, server_port=int(os.environ['PORT1']))
