@@ -36,7 +36,7 @@ def get_completion(image):
     inputs = processor(raw_image, text, return_tensors="pt")
     
     out = model.generate(**inputs)
-    return processor.decode(out[0], skip_special_tokens=True)
+    return json.loads(processor.decode(out[0], skip_special_tokens=True))
     
     
     #    headers = {
@@ -53,14 +53,6 @@ def get_completion(image):
 #    return json.loads(response.content.decode("utf-8"))
 
 
-#demo = gr.Interface(
-#    fn=get_completion,
-#    inputs="text",
-#    outputs="text"
-#)
-
-#image_url = "https://free-images.com/sm/9596/dog_animal_greyhound_983023.jpg"
-#demo = gr.get_completion(image_url)
 
 
 gr.close_all()
