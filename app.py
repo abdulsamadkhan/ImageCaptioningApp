@@ -6,6 +6,23 @@ import IPython.display
 from PIL import Image
 import base64 
 
+
+from transformers import pipeline
+
+pipe = pipeline("translation", model="Helsinki-NLP/opus-mt-en-es")
+
+def predict(text):
+  return pipe(text)[0]["translation_text"]
+  
+demo = gr.Interface(
+  fn=predict, 
+  inputs='text',
+  outputs='text',
+)
+
+demo.launch()
+
+
 #def greet(name):
 #    return "Hello " + name +os.environ['HF_TOKENS']
 
@@ -19,26 +36,26 @@ import base64
 #gr.Textbox(os.environ['HF_TOKENS'])
 
 #Image-to-text endpoint
-def get_completion(inputs, parameters=None, ENDPOINT_URL="http://internal-aws-prod-internal-revproxy-alb-11660607.us-west-1.elb.amazonaws.com/rev-proxy/huggingface/itt"): 
-    headers = {
-      "Authorization": f"Bearer {os.environ['HF_TOKENS']}",
-      "Content-Type": "application/json"
-    }
-    data = { "inputs": inputs }
-    if parameters is not None:
-        data.update({"parameters": parameters})
-    response = requests.request("POST",
-                                ENDPOINT_URL,
-                                headers=headers,
-                                data=json.dumps(data))
-    return json.loads(response.content.decode("utf-8"))
+#def get_completion(inputs, parameters=None, ENDPOINT_URL="http://internal-aws-prod-internal-revproxy-alb-11660607.us-west-1.elb.amazonaws.com/rev-proxy/huggingface/itt"): 
+#    headers = {
+#      "Authorization": f"Bearer {os.environ['HF_TOKENS']}",
+#      "Content-Type": "application/json"
+#    }
+#    data = { "inputs": inputs }
+#    if parameters is not None:
+#        data.update({"parameters": parameters})
+#    response = requests.request("POST",
+#                                ENDPOINT_URL,
+#                                headers=headers,
+#                                data=json.dumps(data))
+#    return json.loads(response.content.decode("utf-8"))
 
 
-demo = gr.Interface(
-    fn=get_completion,
-    inputs="text",
-    outputs="text"
-)
+#demo = gr.Interface(
+#    fn=get_completion,
+#    inputs="text",
+#    outputs="text"
+#)
 
 #image_url = "https://free-images.com/sm/9596/dog_animal_greyhound_983023.jpg"
 #demo = gr.get_completion(image_url)
@@ -72,4 +89,4 @@ def captioner(image):
  #   //                allow_flagging="never",
  #    //               examples=["christmas_dog.jpeg", "bird_flight.jpeg", "cow.jpeg"])
 
-demo.launch()
+#demo.launch()
