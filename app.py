@@ -3,14 +3,15 @@ import requests, json
 import os
 import io
 import IPython.display
-from PIL import Image
 import base64 
 import torch
-from transformers import pipeline
 
+from PIL import Image
+from transformers import BlipProcessor, BlipForConditionalGeneration
 
+processor = BlipProcessor.from_pretrained("Salesforce/blip-image-captioning-base")
+model = BlipForConditionalGeneration.from_pretrained("Salesforce/blip-image-captioning-base")
 
-completion_obj = pipeline("image-to-text",model="Salesforce/blip-image-captioning-base")
 
 
 
@@ -28,10 +29,14 @@ completion_obj = pipeline("image-to-text",model="Salesforce/blip-image-captionin
 #gr.Textbox(os.environ['HF_TOKENS'])
 
 #Image-to-text endpoint
-def get_completion(inputs): 
+def get_completion(image): 
+    raw_image = Image.open(image).convert('RGB')
 
-    output = get_completion(input)
-    return output[0]['generated_text']
+    text = "a photography of"
+    inputs = processor(raw_image, text, return_tensors="pt")
+    
+    out = model.generate(**inputs)
+    return processor.decode(out[0], skip_special_tokens=True)
     
     
     #    headers = {
@@ -57,16 +62,6 @@ def get_completion(inputs):
 #image_url = "https://free-images.com/sm/9596/dog_animal_greyhound_983023.jpg"
 #demo = gr.get_completion(image_url)
 
-def image_to_base64_str(pil_image):
-    byte_arr = io.BytesIO()
-    pil_image.save(byte_arr, format='PNG')
-    byte_arr = byte_arr.getvalue()
-    return str(base64.b64encode(byte_arr).decode('utf-8'))
-
-def captioner(image):
-    base64_image = image_to_base64_str(image)
-    result = get_completion(base64_image)
-    return result[0]['generated_text']
 
 gr.close_all()
 demo = gr.Interface(fn=get_completion,
