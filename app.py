@@ -54,4 +54,4 @@ demo = gr.Interface(fn=captioner,
  #   //                allow_flagging="never",
  #    //               examples=["christmas_dog.jpeg", "bird_flight.jpeg", "cow.jpeg"])
 
-demo.launch(share=True, server_port=int(os.environ['PORT1']))
+demo.launch()
