@@ -1,3 +1,2 @@
 Ipython
-IPython.display
 PIL
