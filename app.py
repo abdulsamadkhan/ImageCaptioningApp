@@ -6,7 +6,15 @@ import IPython.display
 from PIL import Image
 import base64 
 
-print(os.environ['HF_TOKENS'])
+def greet(name):
+    return "Hello " + name +os.environ['HF_TOKENS']
+
+
+demo = gr.Interface(fn=greet, inputs="text", outputs="text")
+
+demo.launch()
+
+
 #gr.close_all()
 #gr.Textbox(os.environ['HF_TOKENS'])
 
