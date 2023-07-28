@@ -23,7 +23,8 @@ def get_completion(inputs, parameters=None, ENDPOINT_URL="http://internal-aws-pr
                                 data=json.dumps(data))
     return json.loads(response.content.decode("utf-8"))
 
-
+image_url = "https://free-images.com/sm/9596/dog_animal_greyhound_983023.jpg"
+demo = gr.textbox(get_completion(image_url))
 
 def image_to_base64_str(pil_image):
     byte_arr = io.BytesIO()
@@ -36,13 +37,13 @@ def captioner(image):
     result = get_completion(base64_image)
     return result[0]['generated_text']
 
-gr.close_all()
-demo = gr.Interface(fn=captioner,
-                    inputs=[gr.Image(label="Upload image", type="pil")],
-                    outputs=[gr.Textbox(label="Caption")],
-                    title="Image Captioning with BLIP",
-                    description="Caption any image using the BLIP model",
-                    allow_flagging="never")
+#gr.close_all()
+#demo = gr.Interface(fn=captioner,
+#                    inputs=[gr.Image(label="Upload image", type="pil")],
+#                    outputs=[gr.Textbox(label="Caption")],
+#                    title="Image Captioning with BLIP",
+#                    description="Caption any image using the BLIP model",
+#                    allow_flagging="never")
 
 
 
