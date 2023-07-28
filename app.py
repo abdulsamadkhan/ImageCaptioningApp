@@ -24,7 +24,7 @@ def get_completion(inputs, parameters=None, ENDPOINT_URL="http://internal-aws-pr
     return json.loads(response.content.decode("utf-8"))
 
 image_url = "https://free-images.com/sm/9596/dog_animal_greyhound_983023.jpg"
-demo = gr.textbox(get_completion(image_url))
+demo = gr.TextBox(get_completion(image_url))
 
 def image_to_base64_str(pil_image):
     byte_arr = io.BytesIO()
