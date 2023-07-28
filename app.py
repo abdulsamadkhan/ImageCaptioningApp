@@ -5,6 +5,7 @@ import io
 import IPython.display
 from PIL import Image
 import base64 
+import torch
 
 
 from transformers import pipeline
