@@ -69,7 +69,7 @@ def captioner(image):
     return result[0]['generated_text']
 
 gr.close_all()
-demo = gr.Interface(fn=captioner,
+demo = gr.Interface(fn=get_completion,
                     inputs=[gr.Image(label="Upload image", type="pil")],
                     outputs=[gr.Textbox(label="Caption")],
                     title="Image Captioning with BLIP",
