@@ -1,3 +1,7 @@
+# Image Captioning with BLIP
+This repository contains code for an Image Captioning application using the BLIP model (Bye-Bye Language Pretraining) developed by Salesforce. The application allows users to upload an image, and it generates a descriptive caption for the provided image using the BLIP model.
+
+
 ---
 title: ImageCaptioningApp
 emoji: ⚡
