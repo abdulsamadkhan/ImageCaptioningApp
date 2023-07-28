@@ -29,14 +29,14 @@ model = BlipForConditionalGeneration.from_pretrained("Salesforce/blip-image-capt
 #gr.Textbox(os.environ['HF_TOKENS'])
 
 #Image-to-text endpoint
-def get_completion(image): 
-    raw_image = Image.open(image).convert('RGB')
+def get_completion(raw_image): 
+    #raw_image = Image.open(image).convert('RGB')
 
     text = "a photography of"
     inputs = processor(raw_image, text, return_tensors="pt")
     
     out = model.generate(**inputs)
-    return json.loads(processor.decode(out[0], skip_special_tokens=True))
+    return processor.decode(out[0], skip_special_tokens=True)
     
     
     #    headers = {
