@@ -42,7 +42,16 @@ demo = gr.Interface(fn=captioner,
                     outputs=[gr.Textbox(label="Caption")],
                     title="Image Captioning with BLIP",
                     description="Caption any image using the BLIP model",
-                    allow_flagging="never",
-                    examples=["christmas_dog.jpeg", "bird_flight.jpeg", "cow.jpeg"])
+                    allow_flagging="never")
+
+
+
+#demo = gr.Interface(fn=captioner,
+ #                   inputs=[gr.Image(label="Upload image", type="pil")],
+ #//                   outputs=[gr.Textbox(label="Caption")],
+ # //                  title="Image Captioning with BLIP",
+ #  //                 description="Caption any image using the BLIP model",
+ #   //                allow_flagging="never",
+ #    //               examples=["christmas_dog.jpeg", "bird_flight.jpeg", "cow.jpeg"])
 
 demo.launch(share=True, server_port=int(os.environ['PORT1']))
