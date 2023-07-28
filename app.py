@@ -2,7 +2,7 @@ import gradio as gr
 import requests, json
 import os
 import io
-#import IPython.display
+import IPython.display
 #from PIL import Image
 #import base64 
 
