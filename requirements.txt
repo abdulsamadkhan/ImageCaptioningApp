@@ -2,3 +2,4 @@ Ipython
 Pillow
 transformers
 torch
+sentencepiece
